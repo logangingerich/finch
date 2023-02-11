@@ -89,8 +89,6 @@ app.get("/individual/:id", async (req, res) => {
     try {
         const individual = await getIndividual(global.accessToken, req.params.id);
         const employment = await getEmployment(global.accessToken, req.params.id);
-        console.log("INDIVIDUAL = " + JSON.stringify(individual.data));
-        console.log("EMPLOYMENT = " + JSON.stringify(employment.data));
         res.render("individual", { title: "Profile", individual: individual.data.responses, employment: employment.data.responses });
     } catch (error) {
         console.log(error)

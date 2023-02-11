@@ -23,7 +23,7 @@
 4. Start the server and head to `http://localhost:8000/ to begin!
 
     ```sh
-    npm start
+    npm run dev
     ```
 
 ## Click into a Provider to see Company Details. 
