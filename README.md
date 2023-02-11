@@ -22,8 +22,10 @@
 
 4. Start the server and head to `http://localhost:8000/ to begin!
 
-```sh
-npm start
-```
+    ```sh
+    npm start
+    ```
 
-## Click into a Provider to see Company Details. Then, click Directory Users for a full user list. Click on any name for User Information and Employment Information.
+## Click into a Provider to see Company Details. 
+## Then, click Directory Users for a full user list. 
+## Click on any name for User Information and Employment Information.
