@@ -1,0 +1,13 @@
+extends layout
+
+block layout-content
+  div.View
+    h1.Banner Finch Sandbox API Example
+    div.Message
+      div.Title
+        h3 Select your directory provider
+           div.NavButtons
+             ul
+               each provider in providers
+                 li.div.NavButton
+                   a(href=`/company/${provider.id}`) #{provider.name} 

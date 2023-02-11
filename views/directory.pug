@@ -1,0 +1,12 @@
+extends layout
+
+block layout-content
+  div.View.UserView
+    h1.Banner GET /employer/directory
+    div.Message
+      div.Title
+        h1 Directory List
+      ul
+        each user in directory
+          li.div
+            a(href=`/individual/${user.id}`) #{user.first_name || "N/A"} #{user.last_name || "N/A"} - #{user.id || "N/A"} 
