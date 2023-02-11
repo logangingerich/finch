@@ -6,13 +6,13 @@
 
     ```bash
     # HTTPS
-    git clone https://github.com/workos/node-example-applications.git
+    git clone https://github.com/logangingerich/finch.git 
     ```
 
-2. Navigate to SSO app within the cloned repo.
+2. Navigate into the repository.
 
     ```bash
-    $ cd node-example-applications/node-sso-example
+    $ cd finch
     ```
 
 3. Install the dependencies.
