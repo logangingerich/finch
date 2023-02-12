@@ -20,7 +20,7 @@
     $ npm install
     ```
 
-4. Start the server and head to `http://localhost:8000/ to begin!
+4. Start the server and head to `http://localhost:8000/` to begin!
 
     ```sh
     npm run dev
