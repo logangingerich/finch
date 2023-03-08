@@ -12,6 +12,37 @@ app.use(express.static(path.join(__dirname, "public")));
 
 const BASE_URL = 'http://finch-sandbox-se-interview.vercel.app/'
 
+const providers = [
+    {id: "adp_run", name:"ADP Run"}, 
+    {id: "bamboo_hr", name: "BambooHR"}, 
+    {id: "bamboo_hr_api", name:"Bamboo HR (API)"},
+    {id: "gusto", name:"Gusto"},  
+    {id: "humaans", name: "Humaans"}, 
+    {id: "insperity", name: "Insperity"}, 
+    {id: "justworks", name: "Justworks"},
+    {id: "namely", name: "Namely"}, 
+    {id: "paychex_flex", name: "Paychex Flex"},
+    {id: "paychex_flex_api", name: "Paychex Flex (API)"}, 
+    {id: "paycom", name: "Paycom"}, 
+    {id: "paycom_api", name: "Paycom (API)"}, 
+    {id: "paylocity", name: "Paylocity"}, 
+    {id: "paylocity_api", name: "Paylocity (API)"}, 
+    {id: "personio", name: "Personio"}, 
+    {id: "quickbooks", name: "Quickbooks"}, 
+    {id: "rippling", name: "Rippling"}, 
+    {id: "sage_hr", name: "Sage HR"}, 
+    {id: "sapling", name: "Sapling"}, 
+    {id: "sequoia_one", name: "Sequoia One"}, 
+    {id: "square_payroll", name: "Square Payroll"}, 
+    {id: "trinet", name: "Trinet"}, 
+    {id: "trinet_api", name: "Trinet (API)"}, 
+    {id: "ulti_pro", name: "Ulti Pro"}, 
+    {id: "wave", name: "Wave"}, 
+    {id: "workday", name:"Workday"},
+    {id: "zenefits", name: "Zenefits"}, 
+    {id: "zenefits_api", name: "Zenefits (API)"}
+];
+
 async function getToken(id){
     return await axios.post(BASE_URL + 'api/sandbox/create', {
         provider: id,
@@ -62,7 +93,7 @@ async function getEmployment(token, id){
 app.get("/", async (req, res, next) => {
     res.render("index", { 
         "title": "Home", 
-        "providers": [{id: "gusto", name:"Gusto"}, {id: "bamboohr", name: "BambooHR"}, {id: "justworks", name: "Justworks"}, {id: "paychex_flex", name: "Paychex Flex"},{id:"workday", name:"Workday"}]});
+        "providers": providers});
 });
 
 app.get("/company/:id", async (req, res) => {
