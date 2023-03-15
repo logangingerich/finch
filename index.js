@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require("express");
 const path = require("path");
 const axios = require('axios');
@@ -9,8 +10,10 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
 app.use(express.static(path.join(__dirname, "public")));
 
+const BASE_URL = 'https://api.tryfinch.com/'
 
-const BASE_URL = 'http://finch-sandbox-se-interview.vercel.app/'
+const client_id = process.env.CLIENT_ID;
+const client_secret = process.env.CLIENT_SECRET;
 
 const providers = [
     {id: "adp_run", name:"ADP Run"}, 
@@ -44,14 +47,16 @@ const providers = [
 ];
 
 async function getToken(id){
-    return await axios.post(BASE_URL + 'api/sandbox/create', {
-        provider: id,
-        products: ["company", "directory", "individual", "employment"]
+    return await axios.post(BASE_URL + 'auth/token', {
+        client_id: client_id,
+        client_secret: client_secret,
+        code: id,
+        redirect_uri: 'http://localhost:8000/'
     })
 }
 
 async function getDirectory(token){
-    return await axios.get(BASE_URL + 'api/employer/directory', {
+    return await axios.get(BASE_URL + 'employer/directory', {
         headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json',
@@ -61,7 +66,7 @@ async function getDirectory(token){
 }
 
 async function getCompany(token){
-    return await axios.get(BASE_URL + 'api/employer/company', {
+    return await axios.get(BASE_URL + 'employer/company', {
         headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json',
@@ -71,7 +76,7 @@ async function getCompany(token){
 }
 
 async function getIndividual(token, id){
-    return await axios.post(BASE_URL + 'api/employer/individual', {requests: [{individual_id: id}]}, {
+    return await axios.post(BASE_URL + 'employer/individual', {requests: [{individual_id: id}]}, {
         headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json',
@@ -81,7 +86,7 @@ async function getIndividual(token, id){
 }
 
 async function getEmployment(token, id){
-    return await axios.post(BASE_URL + 'api/employer/employment', {requests: [{individual_id: id}]}, {
+    return await axios.post(BASE_URL + 'employer/employment', {requests: [{individual_id: id}]}, {
         headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json',
@@ -91,15 +96,26 @@ async function getEmployment(token, id){
 }
 
 app.get("/", async (req, res, next) => {
-    res.render("index", { 
-        "title": "Home", 
-        "providers": providers});
+    try{
+        if (req.query.code) {
+            const access = await getToken(req.query.code);
+            global.accessToken = access.data.access_token;
+        }        
+        res.render("index", { 
+            "title": "Home", 
+            "providers": providers,
+            "client_id": client_id,
+            "accessToken": global.accessToken || ""
+        })
+    } 
+    catch (error) {
+        console.log(error)
+        res.render("error", { title: "Error", error: error });
+    }
 });
 
 app.get("/company/:id", async (req, res) => {
     try {
-        const access = await getToken(req.params.id);
-        global.accessToken = access.data.access_token
         const company = await getCompany(global.accessToken);
         res.render("company", { title: "Company", company: company.data})
     } catch (error) {

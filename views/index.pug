@@ -5,9 +5,14 @@ block layout-content
     h1.Banner Finch Sandbox API Example
     div.Message
       div.Title
-        h3 Select your directory provider
-           div.NavButtons
-             ul
-               each provider in providers
-                 li.div.NavButton
-                   a(href=`/company/${provider.id}`) #{provider.name} 
+        if `${accessToken}`
+          h3 Select your directory provider
+            div.NavButtons
+              ul
+                each provider in providers
+                  li.div.NavButton
+                    a(href=`/company/${provider.id}`) #{provider.name} 
+        else
+          h3 
+            a(href=`https://connect.tryfinch.com/authorize?&client_id=${client_id}&products=company directory individual employment payment pay_statement&redirect_uri=http://localhost:8000/&sandbox=true`) Initiate Finch Connect
+        h5 Use username <strong>largeco</strong> and password <strong>letmein</strong>.
