@@ -15,43 +15,22 @@ const BASE_URL = 'https://api.tryfinch.com/'
 const client_id = process.env.CLIENT_ID;
 const client_secret = process.env.CLIENT_SECRET;
 
-const providers = [
-    {id: "adp_run", name:"ADP Run"}, 
-    {id: "bamboo_hr", name: "BambooHR"}, 
-    {id: "bamboo_hr_api", name:"Bamboo HR (API)"},
-    {id: "gusto", name:"Gusto"},  
-    {id: "humaans", name: "Humaans"}, 
-    {id: "insperity", name: "Insperity"}, 
-    {id: "justworks", name: "Justworks"},
-    {id: "namely", name: "Namely"}, 
-    {id: "paychex_flex", name: "Paychex Flex"},
-    {id: "paychex_flex_api", name: "Paychex Flex (API)"}, 
-    {id: "paycom", name: "Paycom"}, 
-    {id: "paycom_api", name: "Paycom (API)"}, 
-    {id: "paylocity", name: "Paylocity"}, 
-    {id: "paylocity_api", name: "Paylocity (API)"}, 
-    {id: "personio", name: "Personio"}, 
-    {id: "quickbooks", name: "Quickbooks"}, 
-    {id: "rippling", name: "Rippling"}, 
-    {id: "sage_hr", name: "Sage HR"}, 
-    {id: "sapling", name: "Sapling"}, 
-    {id: "sequoia_one", name: "Sequoia One"}, 
-    {id: "square_payroll", name: "Square Payroll"}, 
-    {id: "trinet", name: "Trinet"}, 
-    {id: "trinet_api", name: "Trinet (API)"}, 
-    {id: "ulti_pro", name: "Ulti Pro"}, 
-    {id: "wave", name: "Wave"}, 
-    {id: "workday", name:"Workday"},
-    {id: "zenefits", name: "Zenefits"}, 
-    {id: "zenefits_api", name: "Zenefits (API)"}
-];
-
 async function getToken(id){
     return await axios.post(BASE_URL + 'auth/token', {
         client_id: client_id,
         client_secret: client_secret,
         code: id,
         redirect_uri: 'http://localhost:8000/'
+    })
+}
+
+async function introspect(token){
+    return await axios.get(BASE_URL + 'introspect/', {
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+            'Finch-API-Version': '2020-09-17'
+        }
     })
 }
 
@@ -100,13 +79,16 @@ app.get("/", async (req, res, next) => {
         if (req.query.code) {
             const access = await getToken(req.query.code);
             global.accessToken = access.data.access_token;
-        }        
-        res.render("index", { 
-            "title": "Home", 
-            "providers": providers,
-            "client_id": client_id,
-            "accessToken": global.accessToken || ""
-        })
+            const company = await introspect(global.accessToken);
+            const company_id = company.data.company_id;
+            res.redirect(`/company/${company_id}`)
+        }  else {      
+            res.render("index", { 
+                "title": "Home", 
+                "client_id": client_id,
+                "accessToken": global.accessToken || ""
+            })
+        }
     } 
     catch (error) {
         console.log(error)
