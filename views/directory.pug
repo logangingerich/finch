@@ -1,12 +1,17 @@
 extends layout
 
 block layout-content
-  div.View.UserView
-    h1.Banner GET /employer/directory
-    div.Message
-      div.Title
-        h1 Directory List
-      ul
-        each user in directory
-          li.div
-            a(href=`/individual/${user.id}`) #{user.first_name || "N/A"} #{user.last_name || "N/A"} - #{user.id || "N/A"} 
+  div.container
+    div.d-none.d-sm-none.d-md-block 
+      h1.text-center.text-uppercase GET /employer/directory
+    div.login-card.d-flex.rounded-lg.overflow-hidden.bg-white
+      div.login-message.d-none.d-sm-none.d-md-flex.flex-column.justify-content-center.p-5
+        img(src='/welcome.svg', class="img-fluid mb-3")
+        h2 Directory List
+      div.login-body
+        div.login-body-wrapper.mx-auto
+          p.text-center.text-uppercase.mb-3.text-primary
+            ul
+              each user in directory
+                li.div
+                  a(type="button", href=`/individual/${user.id}`) #{user.first_name || "N/A"} #{user.last_name || "N/A"} 

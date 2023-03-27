@@ -33,3 +33,50 @@ block layout-content
              li Active?: #{employ.body.is_active}
              li Class Code: #{employ.body.class_code  || "N/A"}
              li Location: #{employ.body.location.line1} #{employ.body.location.line2} #{employ.body.location.city}, #{employ.body.location.state} #{employ.body.location.postal_code} #{employ.body.location.country}
+
+block layout-content
+  div.container
+    div.d-none.d-sm-none.d-md-block 
+      h1.text-center.text-uppercase POST employer/individual
+      h1.text-center.text-uppercase +
+      h1.text-center.text-uppercase POST employer/employment
+    div.login-card.d-flex.rounded-lg.overflow-hidden.bg-white
+      div.login-message.d-none.d-sm-none.d-md-flex.flex-column.justify-content-center.p-5
+        img(src='/welcome.svg', class="img-fluid mb-3")
+        h2 User information
+      div.login-body
+        div.login-body-wrapper.mx-auto
+          p.text-center.text-uppercase.mb-3.text-primary
+            ul
+              each info in individual
+                li Name: #{info.body.first_name} #{info.body.middle_name} #{info.body.last_name}
+                li Preferred Name: #{info.body.preferred_name || "N/A"}
+                li ID: #{info.body.id}
+                each email in info.body.emails
+                  li Email: #{email.data} - #{email.type}
+                each phone_number in info.body.phone_numbers
+                  li Phone Number: #{phone_number.data} - #{phone_number.type}
+                li Gender: #{info.body.gender || "N/A"}
+                li D.O.B.: #{info.body.dob || "N/A"}
+                li Residence: #{info.body.residence.line1} #{info.body.residence.line2} #{info.body.residence.city}, #{info.body.residence.state} #{info.body.residence.postal_code} #{info.body.residence.country}
+    br
+    div.login-card.d-flex.rounded-lg.overflow-hidden.bg-white
+      div.login-message.d-none.d-sm-none.d-md-flex.flex-column.justify-content-center.p-5
+        img(src='/welcome.svg', class="img-fluid mb-3")
+        h2 Employment information
+      div.login-body
+        div.login-body-wrapper.mx-auto
+          p.text-center.text-uppercase.mb-3.text-primary
+            ul
+              each employ in employment
+                li Name: #{employ.body.first_name} #{employ.body.middle_name} #{employ.body.last_name}
+                li Title: #{employ.body.preferred_name || "N/A"}
+                li ID: #{employ.body.id}
+                li Employment: #{employ.body.employment.type} - #{employ.body.employment.subtype}
+                li Manager ID: #{employ.body.manager ? employ.body.manager.id : "N/A"}
+                li Department: #{employ.body.department.name || "N/A"}
+                li Start Date: #{employ.body.start_date || "N/A"}
+                li End Date: #{employ.body.end_date || "N/A"}
+                li Active?: #{employ.body.is_active}
+                li Class Code: #{employ.body.class_code  || "N/A"}
+                li Location: #{employ.body.location.line1} #{employ.body.location.line2} #{employ.body.location.city}, #{employ.body.location.state} #{employ.body.location.postal_code} #{employ.body.location.country}

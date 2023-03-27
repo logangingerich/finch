@@ -1,28 +1,27 @@
 extends layout
 
 block layout-content
-  div.View.UserView
-    h1.Banner GET employer/company
-    div.Message
-      div.Title
-        h1 Company Information
-
-      p Company ID: #{company.id || "N/A"}
-      p Legal Name: #{company.legal_name || "N/A"}
-      p EIN: #{company.ein || "N/A"}
-      p Phone Number: #{company.primary_phone_number || "N/A"}
-      h3 Departments
-      ul
-        each department in company.departments
-          li #{department.name || "N/A"}
-      h3 Locations
-      ul
-        each location in company.locations
-          li #{location.line1 || "N/A"} #{location.line2} #{location.city || "N/A"}, #{location.state || "N/A"} #{location.postal_code || "N/A"} #{location.country || "N/A"}
-      h3 Accounts
-      ul
-        each account in company.accounts
-          li #{account.institution_name || "N/A"} - #{account.account_name || "N/A"} - #{account.account_type || "N/A"} - #{account.account_number || "N/A"} - #{account.routing_number || "N/A"}
-    
-      div.NavButton
-        a(href=`/directory`) Directory Users
+  div.container
+    div.d-none.d-sm-none.d-md-block 
+      h1.text-center.text-uppercase GET employer/company
+    div.login-card.d-flex.rounded-lg.overflow-hidden.bg-white
+      div.login-message.d-none.d-sm-none.d-md-flex.flex-column.justify-content-center.p-5
+        img(src='/welcome.svg', class="img-fluid mb-3")
+        h2 Company Information
+      div.login-body
+        div.login-body-wrapper.mx-auto
+          p Departments
+            ul
+              each department in company.departments
+                li #{department.name || "N/A"}
+          p Locations
+            ul
+              each location in company.locations
+                li #{location.line1 || "N/A"} #{location.line2} #{location.city || "N/A"}, #{location.state || "N/A"} #{location.postal_code || "N/A"} #{location.country || "N/A"}
+          p Accounts
+            ul
+              each account in company.accounts
+                li #{account.institution_name || "N/A"} - #{account.account_name || "N/A"} - #{account.account_type || "N/A"} - #{account.account_number || "N/A"} - #{account.routing_number || "N/A"}
+        
+          h4
+            a(href=`/directory`) See Directory Users

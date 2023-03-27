@@ -9,3 +9,15 @@ block layout-content
 
       h6 Sorry, that endpoint is not available for this provider!
 
+block layout-content
+  div.container
+    div.d-none.d-sm-none.d-md-block 
+      h1.text-center.text-uppercase Oops!
+    div.login-card.d-flex.rounded-lg.overflow-hidden.bg-white
+      div.login-message.d-none.d-sm-none.d-md-flex.flex-column.justify-content-center.p-5
+        img(src='/welcome.svg', class="img-fluid mb-3")
+        h2 MyCorp 
+        p *Powered by Finch
+      div.login-body
+        div.login-body-wrapper.mx-auto
+          h3.text-center.text-uppercase.mb-3.text-primary Sorry, that endpoint is not available for this provider!

@@ -20,7 +20,7 @@ async function getToken(id){
         client_id: client_id,
         client_secret: client_secret,
         code: id,
-        redirect_uri: 'http://localhost:8000/'
+        redirect_uri: 'http://localhost:8000'
     })
 }
 
@@ -81,7 +81,7 @@ app.get("/", async (req, res, next) => {
             global.accessToken = access.data.access_token;
             const company = await introspect(global.accessToken);
             const company_id = company.data.company_id;
-            res.redirect(`/company/${company_id}`)
+            res.render(`success`, {company_id: company_id});
         }  else {      
             res.render("index", { 
                 "title": "Home", 

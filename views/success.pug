@@ -2,8 +2,6 @@ extends layout
 
 block layout-content
   div.container
-    div.d-none.d-sm-none.d-md-block 
-      h1.text-center.text-uppercase Your Application
     div.login-card.d-flex.rounded-lg.overflow-hidden.bg-white
       div.login-message.d-none.d-sm-none.d-md-flex.flex-column.justify-content-center.p-5
         img(src='/welcome.svg', class="img-fluid mb-3")
@@ -11,5 +9,6 @@ block layout-content
         p *Powered by Finch
       div.login-body
         div.login-body-wrapper.mx-auto
-          h3.text-center.text-uppercase.mb-3.text-primary
-            a(href=`https://connect.tryfinch.com/authorize?&client_id=${client_id}&products=company directory individual employment &redirect_uri=http://localhost:8000&sandbox=true`) Connect your HRIS
+          h3.text-center.text-uppercase.mb-3.text-primary Success! For your customer's Admin, that's it!
+          p 
+            a(href=`/company/${company_id}`) Click here to see the employee information available to you.
