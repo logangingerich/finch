@@ -26,6 +26,6 @@
     npm run dev
     ```
 
-## Click into a Provider to see Company Details. 
-## Then, click Directory Users for a full user list. 
-## Click on any name for User Information and Employment Information.
+### Click "Connect Your HRIS" to launch Finch Connect redirect flow. 
+### Authorize connection with username `largeco` and password `letmein`. 
+### Navigate Company, Directory, User Information and Employment Information.
