@@ -2,13 +2,14 @@ extends layout
 
 block layout-content
   div.container
+    br
+    br
     div.login-card.d-flex.rounded-lg.overflow-hidden.bg-white
       div.login-message.d-none.d-sm-none.d-md-flex.flex-column.justify-content-center.p-5
         img(src='/welcome.svg', class="img-fluid mb-3")
         h2 MyCorp 
         p *Powered by Finch
-      div.login-body
-        div.login-body-wrapper.mx-auto
-          h3.text-center.text-uppercase.mb-3.text-primary Success! For your customer's Admin, that's it!
-          p 
-            a(href=`/company/${company_id}`) Click here to see the employee information available to you.
+      div.login-body.justify-content-center
+        div.text-center.login-body-wrapper.mx-auto
+          h3.text-center.text-uppercase.mb-3.text-primary Success, you've connected your provider!
+          a(class="text-center justify-content-center btn btn-success" href=`/company/${company_id}`) View provider data now being shared.

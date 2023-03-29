@@ -38,23 +38,3 @@ body {
 	height: 40px;
 	width: 40px;
 }
-
-.btn-facebook {
-	background: #4267b2;
-	border-color: #4267b2;
-	color: #fff;
-}
-.btn-facebook:hover,
-.btn-facebook:focus {
-	color: #fff;
-}
-
-.btn-google {
-	background: #db3236;
-	border-color: #db3236;
-	color: #fff;
-}
-.btn-google:hover,
-.btn-google:focus {
-	color: #fff;
-}
