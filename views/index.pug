@@ -23,7 +23,7 @@ block layout-content
           p.text-center.mb-3 Would you like to import your data?
             br
             br
-            a(class="text-center btn btn-primary" href=`https://connect.tryfinch.com/authorize?&client_id=${client_id}&products=company directory individual employment &redirect_uri=http://localhost:8000&sandbox=true`) Yes, import my data
+            a(class="text-center btn btn-primary" href=`https://connect.tryfinch.com/authorize?&client_id=${client_id}&products=company directory individual employment &redirect_uri=${redirect_uri}&sandbox=true`) Yes, import my data
             br
             br
             a(class="text-center btn btn-warning") No, thanks! I'll do it manually.

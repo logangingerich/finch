@@ -87,6 +87,7 @@ app.get("/", async (req, res, next) => {
             res.render("index", { 
                 "title": "Home", 
                 "client_id": client_id,
+                "redirect_uri": redirect_uri,
                 "accessToken": global.accessToken || ""
             })
         }
