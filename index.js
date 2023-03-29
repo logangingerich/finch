@@ -14,13 +14,14 @@ const BASE_URL = 'https://api.tryfinch.com/'
 
 const client_id = process.env.CLIENT_ID;
 const client_secret = process.env.CLIENT_SECRET;
+const redirect_uri = process.env.REDIRECT_URI;
 
 async function getToken(id){
     return await axios.post(BASE_URL + 'auth/token', {
         client_id: client_id,
         client_secret: client_secret,
         code: id,
-        redirect_uri: 'http://localhost:8000'
+        redirect_uri: redirect_uri
     })
 }
 
