@@ -4,10 +4,6 @@ block layout-content
   div.View.UserView
     div.Message
       div.Title
-        h1 Error Information
-
-      h6 Sorry, that endpoint is not available for this provider!
-
 block layout-content
   div.container
     div.d-none.d-sm-none.d-md-block 
@@ -16,8 +12,9 @@ block layout-content
     div.login-card.d-flex.rounded-lg.overflow-hidden.bg-white
       div.login-message.d-none.d-sm-none.d-md-flex.flex-column.justify-content-center.p-5
         img(src='/welcome.svg', class="img-fluid mb-3")
-        h2 Galactic Benefits*
-        p *Powered by Finch
+        h2 Galactic Benefits
+        p *Powered by 
+          img(src='/logo.svg', class="img-fluid logo")
       div.login-body
         div.login-body-wrapper.mx-auto
-          h3.text-center.text-uppercase.mb-3.text-primary Sorry, that endpoint is not available for this provider!
+          h3.text-center.text-uppercase.mb-3.text-primary Sorry, something went wrong!
